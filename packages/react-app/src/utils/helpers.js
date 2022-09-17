@@ -1,4 +1,6 @@
 // these are all functions that help clean the data that we get back from the blockchain.
+//All of this was given to us by JSM
+
 import { Contract } from "@ethersproject/contracts";
 import { abis } from "@my-app/contracts";
 import { useCall } from "@usedapp/core";
