@@ -1,6 +1,6 @@
 export { getFactoryInfo } from './getFactoryInfo';
 export { getRouterInfo } from './getRouterInfo';
-export { getPairInfo } from './getPairInfo';
+export { getPairsInfo } from './getPairsInfo';
 
 export { 
   getAvailableTokens,
