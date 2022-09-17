@@ -1,3 +1,7 @@
+export { getFactoryInfo } from './getFactoryInfo';
+export { getRouterInfo } from './getRouterInfo';
+export { getPairInfo } from './getPairInfo';
+
 export { 
   getAvailableTokens,
   getCounterpartTokens,
@@ -6,5 +10,5 @@ export {
   getFailureMessage,
   getSuccessMessage,
   useAmountsOut,
-  useOnClickOutside
+  useOnClickOutside,
 } from './helpers';

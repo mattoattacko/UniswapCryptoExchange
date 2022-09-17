@@ -5,12 +5,13 @@ import styles from './styles'
 import { uniswapLogo } from "./assets";
 import { Exchange, Loader, WalletButton } from "./components";
 
+import { usePools } from "./hooks";
+
 
 const App = () => {
 
-  const { account } = useEthers() //account is the address of our metamask account
-
-  const poolsLoading = false
+  const { account } = useEthers(); //account is the address of our metamask account
+  const [loading, pools] = usePools(); //we call our custom hook to get the pools
 
   return (
     <div className={styles.container}>
@@ -42,9 +43,9 @@ const App = () => {
 
                 {/* if the account exists, and if pools are loading, then show the loader component. If we have the account and the pools are not loading, render the exchange component. If we dont have an account, we also show a Loader component */}
                 {account ? (
-                  poolsLoading ? (
+                  loading ? (
                     <Loader title='Loading pools, please wait...' />
-                  ) : <Exchange />
+                  ) : <Exchange pools={pools} />
                 ) : <Loader title='Please connect your wallet' /> 
                 }
 
