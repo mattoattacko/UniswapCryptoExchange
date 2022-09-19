@@ -25,7 +25,7 @@ const Exchange = ({ pools }) => {
   const [toToken, setToToken] = useState(''); //we don't know which token we want to change to yet
   const [resetState, setResetState] = useState(false); //we use this to reset the success message
 
-  const fromValueBigNumber = parseUnits(fromValue); //parse the string into a big number
+  const fromValueBigNumber = parseUnits(fromValue || "0"); //parse the string into a big number
 
   //list of available tokens we can swap from
   const availableTokens = getAvailableTokens(pools);
@@ -89,7 +89,7 @@ const Exchange = ({ pools }) => {
       [fromToken, toToken], //path. array of addresses
       account, //to
       Math.floor(Date.now() / 1000) + 60 * 20, //2min deadline
-    ).then(() => {
+    ).then((_) => {
       setFromValue('0'); //reset the from value once swap completes
     })
   }

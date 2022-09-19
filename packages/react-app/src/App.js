@@ -31,7 +31,7 @@ const App = () => {
             Uniswap 2.0
           </h1>
           <p className={styles.subTitle}>
-            Exchange tokens in seconds
+            Exchange Tokens in Seconds
           </p>
 
           <div className={styles.exchangeBoxWrapper}>

@@ -1,15 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { formatUnits } from 'ethers/lib/utils';
 
 import { chevronDown } from '../assets';
-import { useOnClickOutside } from '../utils'; //closes menu bar when user clicks outside of it
+import { useOnClickOutside, useAmountsOut } from '../utils'; //closes menu bar when user clicks outside of it
 
 import styles from '../styles';
 
-const AmountOut = () => {
+const AmountOut = ({ fromToken, toToken, amountIn, pairContract, currencyValue, onSelect, currencies }) => {
 
   const [showList, setShowList] = useState(false);
   const [activeCurrency, setActiveCurrency] = useState('Select');
   const ref = useRef();
+
+  const amountOut = useAmountsOut(pairContract, amountIn, fromToken, toToken) ?? 0; //cant be undefined or null, so we use ?? to set it to 0 in case we dont have another value
+
+  useEffect(() => {
+    if(Object.keys(currencies).includes(currencyValue)) { //if the keys include the value that is currently selected, then set the active currency to that value
+      setActiveCurrency(currencies[currencyValue])
+    } else {
+      setActiveCurrency('Select') //reset to Select
+    }
+  }, [currencies, currencyValue])
 
   useOnClickOutside(ref, () => setShowList(false));
 
@@ -18,15 +29,15 @@ const AmountOut = () => {
       <input 
         placeholder='0.0'
         type='number'
-        value=''
-        disabled={true} //because we dont want people typing into the output field
+        value={formatUnits(amountOut)}
+        disabled
         className={styles.amountInput}
       />
 
       {/* choose token to swap */}
       <div className='relative' onClick={() => setShowList((prevState) => !prevState)}>
         <button className={styles.currencyButton}>
-          {'ETH'}
+          {activeCurrency}
           <img 
             src={chevronDown}
             alt='chevron down'
@@ -36,15 +47,16 @@ const AmountOut = () => {
 
         {/* if they do click the button, we want to show menu */}
         {showList && (
-          <ul className={styles.currencyList}>
-            {[
-              { token: 'ETH', tokenName: 'ETH'},
-              { token: 'DAI', tokenName: 'DAI'},
-              { token: 'USDC', tokenName: 'USDC'},
-            ].map(({token, tokenName}, index) => (
+          <ul ref={ref} className={styles.currencyList}>
+            {Object.entries(currencies).map(([token, tokenName], index) => (
               <li
                 key={index}
-                className={`${styles.currencyListItem} ${true ? 'bg-site-dim2' : ''} cursor-pointer`}
+                className={styles.currencyListItem}
+                onClick={() => {
+                  if(typeof onSelect === 'function') onSelect(token); //if typeof is a function, we want to call onSelect and pass in the token
+                  setActiveCurrency(tokenName); //set the active currency to the token name
+                  setShowList(false); //close the menu
+                }}
               >
                 {tokenName}
               </li>

@@ -17,14 +17,14 @@ const AmountIn = ({ value, onChange, currencyValue, onSelect , currencies, isSwa
     if(Object.keys(currencies).includes(currencyValue)) { //if the keys include the value that is currently selected, then set the active currency to that value
       setActiveCurrency(currencies[currencyValue])
     } else {
-      setActiveCurrency('Select')
+      setActiveCurrency('Select') //reset to Select
     }
   }, [currencies, currencyValue])
 
   return (
     <div className={styles.amountContainer}>
       <input 
-        placeholder='0.0'
+        placeholder="0.0"
         type='number'
         value={value}
         disabled={isSwapping} //if we are swapping, we dont want people to be able to type into the input field
