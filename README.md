@@ -2,4 +2,4 @@ This project was bootstrapped with [Create Eth App](https://github.com/paulrberg
 
 ## Uniswap Clone
 
-[img]https://i.imgur.com/zOCKsHs.png[/img]
+<img src='https://i.imgur.com/zOCKsHs.png'>
