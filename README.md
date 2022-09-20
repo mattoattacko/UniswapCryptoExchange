@@ -1,9 +1,9 @@
 This project was bootstrapped with [Create Eth App](https://github.com/paulrberg/create-eth-app).
 
-## Uniswap Clone
+# Uniswap Clone
 
-# CRANQ Pathing
+### CRANQ Pathing
 <img src='https://i.imgur.com/zOCKsHs.png'>
 
-# Desktop Application 
+### Desktop Application 
 <img src='https://i.imgur.com/UC15lj5.png'>
